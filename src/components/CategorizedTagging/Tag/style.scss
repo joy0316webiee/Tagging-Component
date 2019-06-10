@@ -1,0 +1,85 @@
+@import '../../../assets/scss/base.scss';
+
+.tag-container {
+  height: 65px;
+  background-color: #c56bff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 3px 5px;
+  margin-right: 10px;
+  position: relative;
+
+  .tag-header {
+    flex: 1.3;
+
+    .tag-name {
+      display: inline-block;
+
+      span {
+        color: white;
+        font-size: 14px;
+      }
+    }
+  }
+  .tag-content {
+    flex: auto;
+    margin-top: 2px;
+
+    .tag-description {
+      max-width: 200px;
+      p {
+        margin: 0;
+        color: white;
+        font-size: 12px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+  }
+  .tag-footer {
+    flex: 1;
+    display: flex;
+    border-top: 1px solid #e1adf8;
+    margin-top: 2px;
+    justify-content: space-between;
+
+    .tag-group {
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+
+      span {
+        color: white;
+        font-size: 12px;
+        margin-left: 3px;
+      }
+    }
+    .tag-category {
+      border-left: 1px solid #e1adf8;
+      padding: 0 7px;
+
+      span {
+        color: white;
+        font-size: 12px;
+      }
+    }
+  }
+  .tag-actions {
+    position: absolute;
+    right: 4px;
+    top: 3px;
+    cursor: pointer;
+
+    span {
+      width: 5px;
+      height: 5px;
+      color: white;
+      border-radius: 5px;
+      background-color: white;
+      display: block;
+      margin-top: 1px;
+    }
+  }
+}

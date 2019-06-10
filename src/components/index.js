@@ -1,1 +1,1 @@
-export * from './Tagging';
+export * from './CategorizedTagging';

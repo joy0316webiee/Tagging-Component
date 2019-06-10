@@ -1,0 +1,56 @@
+{
+  "data": {
+    "categories": [
+      {
+        "_id": "dsf87ds78a7",
+        "name": "Safety",
+        "colorID": 2
+      },
+      {
+        "_id": "gfd8dsf67s8",
+        "name": "Job Feature",
+        "colorID": 3
+      }
+    ],
+    "groups": [
+      {
+        "_id": "bv8sda6a6s98s",
+        "name": "LV"
+      },
+      {
+        "_id": "bs9s8x6x8sd9a",
+        "name": "HV"
+      }
+    ],
+    "tags": [
+      {
+        "_id": "asd90sa98sd9",
+        "name": "Warning",
+        "categoryID": "gfd8dsf67s8",
+        "groupID": "bv8sda6a6s98s",
+        "description": "about Warning"
+      },
+      {
+        "_id": "9asd87sad7jnd",
+        "name": "Scaffolds",
+        "categoryID": "dsf87ds78a7",
+        "groupID": "bs9s8x6x8sd9a",
+        "description": "about Scaffolds"
+      },
+      {
+        "_id": "d09d8776d6s8",
+        "name": "Salary",
+        "categoryID": "gfd8dsf67s8",
+        "groupID": "bv8sda6a6s98s",
+        "description": "about Salary"
+      },
+      {
+        "_id": "asd90sa98sd9",
+        "name": "Class",
+        "categoryID": "dsf87ds78a7",
+        "groupID": "bs9s8x6x8sd9a",
+        "description": "about Class"
+      }
+    ]
+  }
+}
