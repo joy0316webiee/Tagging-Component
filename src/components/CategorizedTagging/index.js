@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import Tag from './Tag';
+import AutosizeInput from 'react-input-autosize';
+import className from 'classnames';
+import TagElement from './TagElement';
+import CheckBox from './CheckBox';
 import axios from 'axios';
 
+import data from './colors.json';
 import './style.scss';
 
 class CategorizedTagging extends Component {
@@ -14,11 +18,13 @@ class CategorizedTagging extends Component {
     keyword: '',
     errors: [],
     loading: false,
-    toggle: false
+    toggleTagging: false,
+    toggleActions: false
   };
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
+    this.keyInput.focus();
     this.fetchData();
   }
 
@@ -47,41 +53,83 @@ class CategorizedTagging extends Component {
       });
   };
 
-  handleChange = event => {
+  handleChangeKeyword = event => {
     const { tags } = this.state;
     const keyword = event.target.value;
 
     this.setState({
       keyword,
-      toggle: keyword,
+      toggleTagging: keyword,
       searchedTags: tags.filter(tag => {
-        return keyword && tag.name.includes(keyword);
+        return (
+          keyword && tag.name.toLowerCase().includes(keyword.toLowerCase())
+        );
       })
     });
   };
 
   handleClickOutside = event => {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      this.setState({ toggle: false });
+    if (
+      this.taggingWrapperRef &&
+      !this.taggingWrapperRef.contains(event.target)
+    ) {
+      this.setState({ toggleTagging: false });
+    }
+    if (
+      this.actionsWrapperRef &&
+      !this.actionsWrapperRef.contains(event.target)
+    ) {
+      this.setState({ toggleActions: false });
     }
   };
 
-  setWrapperRef = node => {
-    this.wrapperRef = node;
+  handleClickTagElement = tag => {
+    this.setState(
+      {
+        selectedTags: this.state.selectedTags.concat(tag),
+        keyword: '',
+        toggleTagging: false
+      },
+      () => {
+        this.keyInput.focus();
+      }
+    );
+  };
+
+  handleClickTaggingBox = () => {
+    this.keyInput.focus();
+  };
+
+  handleToggleActions = () => {
+    this.setState({
+      toggleActions: true
+    });
+  };
+
+  setTaggingWrapperRef = node => {
+    this.taggingWrapperRef = node;
+  };
+
+  setActionsWrapperRef = node => {
+    this.actionsWrapperRef = node;
+  };
+
+  getCategoryClass = category => {
+    return data.colors.filter(color => color.id === category.colorId)[0].class;
   };
 
   render() {
     // prettier-ignore
-    const { categories, groups, selectedTags, searchedTags, errors, loading, toggle, keyword } = this.state;
+    const { categories, groups, selectedTags, searchedTags, errors, loading, toggleTagging, toggleActions, keyword } = this.state;
 
-    const displayDropdown = () => {
+    const displayTaggingDropdown = () => {
       let categoriedTags = categories.reduce((acc, category) => {
         const filteredTags = searchedTags.filter(tag => {
-          return tag.categoryID === category._id;
+          return tag.categoryId === category._id;
         });
 
         const categoriedTag = {
-          category: category.name,
+          category,
           tags: filteredTags
         };
         acc.push(categoriedTag);
@@ -89,28 +137,33 @@ class CategorizedTagging extends Component {
         return acc;
       }, []);
 
-      console.log(categoriedTags);
-
       return (
         <div className="tagging-dropdown">
           {categoriedTags.map((item, index) => (
             <div key={index} className="tagging-categorized-group">
-              <div className="tagging-category">
+              <div
+                className={className(
+                  'tagging-category',
+                  `${this.getCategoryClass(item.category)}`
+                )}
+              >
                 <span className="bull-point" />
-                <label>{item.category}</label>
+                <label>{item.category.name}</label>
               </div>
               <div className="tagging-group">
                 {item.tags.map(tag => (
-                  <Tag
+                  <TagElement
                     key={tag._id}
                     categories={categories}
                     groups={groups}
+                    keyword={keyword}
+                    handleClickSelf={() => this.handleClickTagElement(tag)}
                     {...tag}
                   />
                 ))}
                 <div className="tagging-create">
                   <button>
-                    create a new {item.category} "{keyword}"
+                    create a new {item.category.name} "{keyword}"
                   </button>
                 </div>
               </div>
@@ -120,29 +173,65 @@ class CategorizedTagging extends Component {
       );
     };
 
+    const displayActionsDropdown = () => {
+      return (
+        <div className="visibility" ref={this.setActionsWrapperRef}>
+          <h1>Visibility</h1>
+          <div className="category">
+            <CheckBox />
+            <span>Category</span>
+          </div>
+          <div className="group">
+            <CheckBox />
+            <span>Group</span>
+          </div>
+          <div className="Description">
+            <CheckBox />
+            <span>Description</span>
+          </div>
+        </div>
+      );
+    };
+
     return (
-      <div className="tagging-container" ref={this.setWrapperRef}>
-        <div className="tagging-box">
+      <div className="tagging-container" ref={this.setTaggingWrapperRef}>
+        <div className="tagging-box" onClick={this.handleClickTaggingBox}>
           <div className="tagging-group">
-            {selectedTags.map(tag => (
-              <Tag categories={categories} groups={groups} {...tag} />
+            {selectedTags.map((tag, index) => (
+              <TagElement
+                key={index}
+                categories={categories}
+                groups={groups}
+                keyword=""
+                {...tag}
+              />
             ))}
+            <div className="tagging-search">
+              <AutosizeInput
+                ref={input => {
+                  this.keyInput = input;
+                }}
+                name="keyword"
+                value={keyword}
+                onChange={this.handleChangeKeyword}
+              />
+            </div>
           </div>
-          <div className="tagging-search">
-            <input
-              type="text"
-              name="keyword"
-              value={keyword}
-              onChange={this.handleChange}
-            />
+          <div className="tagging-actions">
+            <div
+              className="tagging-actions-toggle"
+              onClick={this.handleToggleActions}
+            >
+              {[...Array(3)].map((_, i) => (
+                <span className="round" key={i} />
+              ))}
+            </div>
+            <div className="tagging-actions-menu">
+              {toggleActions && displayActionsDropdown()}
+            </div>
           </div>
         </div>
-        {toggle && displayDropdown()}
-        <div className="tagging-actions">
-          {[...Array(3)].map((_, i) => (
-            <span className="round" key={i} />
-          ))}
-        </div>
+        {toggleTagging && displayTaggingDropdown()}
       </div>
     );
   }

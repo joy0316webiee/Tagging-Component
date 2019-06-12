@@ -3,25 +3,53 @@
 .tagging-container {
   width: 572px;
   margin: 0 auto;
-  position: relative;
 
   .tagging-box {
+    position: relative;
     background-color: #f2f2f2;
     display: flex;
     padding-left: 13px;
     padding-right: 20px;
 
     .tagging-group {
-    }
-    .tagging-search {
-      flex: auto;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 10px 0px;
 
-      input {
-        width: 100%;
-        height: 55px;
-        font-size: 23px;
-        border: none;
-        background-color: #f2f2f2;
+      .tagging-search {
+        input {
+          max-width: 540px;
+          height: 55px;
+          font-size: 23px;
+          border: none;
+          background-color: #f2f2f2;
+        }
+      }
+    }
+    .tagging-actions {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translate(0, -50%);
+      cursor: pointer;
+
+      .tagging-actions-toggle {
+        height: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        span {
+          width: 5px;
+          height: 5px;
+          background-color: lighten(grey, 20%);
+          border-radius: 50%;
+          display: block;
+        }
+      }
+      .tagging-actions-menu {
+        position: absolute;
       }
     }
   }
@@ -51,18 +79,50 @@
       margin-bottom: 10px;
 
       .tagging-category {
-        span {
-          width: 10px;
-          height: 10px;
-          display: inline-block;
-          background-color: #f84848;
-          border-radius: 50%;
+        &.green-secondary {
+          @include coloredCategory($green-secondary);
         }
-        label {
-          font-size: 14px;
-          font-weight: bold;
-          color: #f84848;
-          margin-left: 4px;
+        &.pink {
+          @include coloredCategory($pink);
+        }
+        &.yellow-dark {
+          @include coloredCategory($yellow-dark);
+        }
+        &.green-dark {
+          @include coloredCategory($green-dark);
+        }
+        &.blue-light {
+          @include coloredCategory($blue-light);
+        }
+        &.black {
+          @include coloredCategory($black);
+        }
+        &.yellow-light {
+          @include coloredCategory($yellow-light);
+        }
+        &.blue-darker {
+          @include coloredCategory($blue-darker);
+        }
+        &.brown {
+          @include coloredCategory($brown);
+        }
+        &.red {
+          @include coloredCategory($red);
+        }
+        &.red-lighter {
+          @include coloredCategory($red-lighter);
+        }
+        &.pink-dark {
+          @include coloredCategory($pink-dark);
+        }
+        &.green-light {
+          @include coloredCategory($green-light);
+        }
+        &.green-darker {
+          @include coloredCategory($green-darker);
+        }
+        &.red-dark {
+          @include coloredCategory($red-dark);
         }
       }
       .tagging-group {
@@ -82,12 +142,6 @@
           }
         }
       }
-    }
-  }
-  .tagging-actions {
-    position: absolute;
-
-    span {
     }
   }
 }

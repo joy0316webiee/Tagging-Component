@@ -1,0 +1,38 @@
+@mixin coloredCategory($color) {
+  span {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background-color: $color;
+    border-radius: 50%;
+  }
+  label {
+    font-size: 14px;
+    font-weight: bold;
+    color: $color;
+    margin-left: 4px;
+  }
+}
+
+@mixin coloredTag($color) {
+  background-color: $color;
+
+  &:hover {
+    background-color: lighten($color, 5%);
+
+    .tag-header {
+      background-color: lighten($color, 7%);
+    }
+  }
+  .tag-header {
+    background-color: lighten($color, 5%);
+
+    .tag-category {
+      border-left: 1px solid lighten($color, 10%);
+    }
+  }
+
+  .tag-footer {
+    border-top: 1px solid lighten($color, 10%);
+  }
+}

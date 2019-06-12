@@ -1,0 +1,144 @@
+@import '../../../assets/scss/base.scss';
+
+.tag-container {
+  height: 65px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  position: relative;
+  margin-bottom: 7px;
+  text-align: center;
+  cursor: grab;
+
+  &.green-secondary {
+    @include coloredTag($green-secondary);
+  }
+  &.pink {
+    @include coloredTag($pink);
+  }
+  &.yellow-dark {
+    @include coloredTag($yellow-dark);
+  }
+  &.green-dark {
+    @include coloredTag($green-dark);
+  }
+  &.blue-light {
+    @include coloredTag($blue-light);
+  }
+  &.black {
+    @include coloredTag($black);
+  }
+  &.yellow-light {
+    @include coloredTag($yellow-light);
+  }
+  &.blue-darker {
+    @include coloredTag($blue-darker);
+  }
+  &.brown {
+    @include coloredTag($brown);
+  }
+  &.red {
+    @include coloredTag($red);
+  }
+  &.red-lighter {
+    @include coloredTag($red-lighter);
+  }
+  &.pink-dark {
+    @include coloredTag($pink-dark);
+  }
+  &.green-light {
+    @include coloredTag($green-light);
+  }
+  &.green-darker {
+    @include coloredTag($green-darker);
+  }
+  &.red-dark {
+    @include coloredTag($red-dark);
+  }
+
+  .tag-header {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 3px 5px 2px;
+
+    .tag-group {
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+
+      span {
+        color: white;
+        font-size: 12px;
+        margin-left: 3px;
+      }
+    }
+    .tag-category {
+      padding: 0 7px;
+
+      span {
+        color: white;
+        font-size: 12px;
+      }
+    }
+  }
+  .tag-content {
+    flex: auto;
+    margin-top: 2px;
+
+    .tag-description {
+      max-width: 200px;
+      p {
+        margin: 0;
+        color: white;
+        font-size: 12px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+  }
+  .tag-footer {
+    flex: 1.3;
+    margin-top: 2px;
+    padding: 0px 5px 3px;
+
+    .tag-name {
+      display: inline-block;
+
+      span {
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+
+        strong {
+          color: white;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .tag-actions {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    cursor: pointer;
+
+    &:hover {
+      span {
+        background-color: darken(white, 10%);
+      }
+    }
+    span {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: white;
+      display: block;
+      margin-top: 1px;
+    }
+  }
+}
