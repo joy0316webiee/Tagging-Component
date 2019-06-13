@@ -15,12 +15,11 @@
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      padding: 10px 0px;
+      padding: 7px 0px;
 
       .tagging-search {
         input {
           max-width: 540px;
-          height: 55px;
           font-size: 23px;
           border: none;
           background-color: #f2f2f2;
@@ -33,6 +32,7 @@
       top: 50%;
       transform: translate(0, -50%);
       cursor: pointer;
+      z-index: 1;
 
       .tagging-actions-toggle {
         height: 20px;
@@ -50,6 +50,31 @@
       }
       .tagging-actions-menu {
         position: absolute;
+        right: 0;
+        top: calc(100% + 7px);
+        background-color: white;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        border-radius: 3px;
+
+        .visibility {
+          padding: 15px 10px 20px;
+
+          h1 {
+            font-size: 19px;
+            font-weight: bold;
+            color: #000000;
+            margin-top: 0;
+          }
+          > div {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+
+            span {
+              margin-left: 3px;
+            }
+          }
+        }
       }
     }
   }

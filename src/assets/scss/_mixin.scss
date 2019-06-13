@@ -27,12 +27,12 @@
   .tag-header {
     background-color: lighten($color, 5%);
 
-    .tag-category {
+    .tag-group + .tag-category {
       border-left: 1px solid lighten($color, 10%);
     }
   }
 
-  .tag-footer {
+  .tag-content + .tag-footer {
     border-top: 1px solid lighten($color, 10%);
   }
 }

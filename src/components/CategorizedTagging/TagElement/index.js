@@ -26,7 +26,7 @@ class TagElement extends Component {
 
   render() {
     // prettier-ignore
-    const { name, categories, categoryId, groups, groupId, description, keyword} = this.props;
+    const { name, categories, categoryId, groups, groupId, description, keyword, visibility} = this.props;
 
     const displayFilteredName = (name, keyword) => {
       const index = name.toLowerCase().indexOf(keyword.toLowerCase());
@@ -40,19 +40,25 @@ class TagElement extends Component {
         onClick={this.handleClickSelf}
       >
         <div className="tag-header">
-          <div className="tag-group">
-            <img src={ImgUnion} alt="union" />
-            <span>{this.getChildById(groups, groupId).name}</span>
-          </div>
-          <div className="tag-category">
-            <span>{this.getChildById(categories, categoryId).name}</span>
-          </div>
+          {visibility.group && (
+            <div className="tag-group">
+              <img src={ImgUnion} alt="union" />
+              <span>{this.getChildById(groups, groupId).name}</span>
+            </div>
+          )}
+          {visibility.category && (
+            <div className="tag-category">
+              <span>{this.getChildById(categories, categoryId).name}</span>
+            </div>
+          )}
         </div>
-        <div className="tag-content">
-          <div className="tag-description">
-            <p>{description}</p>
+        {visibility.description && (
+          <div className="tag-content">
+            <div className="tag-description">
+              <p>{description}</p>
+            </div>
           </div>
-        </div>
+        )}
         <div className="tag-footer">
           <div className="tag-name">
             <span
@@ -61,11 +67,11 @@ class TagElement extends Component {
               }}
             />
           </div>
-        </div>
-        <div className="tag-actions">
-          {[...Array(3)].map((_, i) => (
-            <span className="round" key={i} />
-          ))}
+          <div className="tag-actions">
+            {[...Array(3)].map((_, i) => (
+              <span className="round" key={i} />
+            ))}
+          </div>
         </div>
       </div>
     );

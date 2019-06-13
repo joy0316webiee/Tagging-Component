@@ -15,6 +15,11 @@ class CategorizedTagging extends Component {
     tags: [],
     selectedTags: [],
     searchedTags: [],
+    visibility: {
+      category: true,
+      group: true,
+      description: false
+    },
     keyword: '',
     errors: [],
     loading: false,
@@ -102,7 +107,16 @@ class CategorizedTagging extends Component {
 
   handleToggleActions = () => {
     this.setState({
-      toggleActions: true
+      toggleActions: !this.state.toggleActions
+    });
+  };
+
+  handleChangeVisibility = (key, value) => {
+    this.setState({
+      visibility: {
+        ...this.state.visibility,
+        [key]: value
+      }
     });
   };
 
@@ -120,7 +134,7 @@ class CategorizedTagging extends Component {
 
   render() {
     // prettier-ignore
-    const { categories, groups, selectedTags, searchedTags, errors, loading, toggleTagging, toggleActions, keyword } = this.state;
+    const { categories, groups, selectedTags, searchedTags, errors, loading, toggleTagging, toggleActions, keyword, visibility } = this.state;
 
     const displayTaggingDropdown = () => {
       let categoriedTags = categories.reduce((acc, category) => {
@@ -157,6 +171,7 @@ class CategorizedTagging extends Component {
                     categories={categories}
                     groups={groups}
                     keyword={keyword}
+                    visibility={visibility}
                     handleClickSelf={() => this.handleClickTagElement(tag)}
                     {...tag}
                   />
@@ -174,19 +189,33 @@ class CategorizedTagging extends Component {
     };
 
     const displayActionsDropdown = () => {
+      const { category, group, description } = visibility;
+
       return (
-        <div className="visibility" ref={this.setActionsWrapperRef}>
+        <div className="visibility">
           <h1>Visibility</h1>
           <div className="category">
-            <CheckBox />
+            <CheckBox
+              name="category"
+              checked={category}
+              onChange={this.handleChangeVisibility}
+            />
             <span>Category</span>
           </div>
           <div className="group">
-            <CheckBox />
+            <CheckBox
+              name="group"
+              checked={group}
+              onChange={this.handleChangeVisibility}
+            />
             <span>Group</span>
           </div>
           <div className="Description">
-            <CheckBox />
+            <CheckBox
+              name="description"
+              checked={description}
+              onChange={this.handleChangeVisibility}
+            />
             <span>Description</span>
           </div>
         </div>
@@ -203,6 +232,7 @@ class CategorizedTagging extends Component {
                 categories={categories}
                 groups={groups}
                 keyword=""
+                visibility={visibility}
                 {...tag}
               />
             ))}
@@ -217,7 +247,7 @@ class CategorizedTagging extends Component {
               />
             </div>
           </div>
-          <div className="tagging-actions">
+          <div className="tagging-actions" ref={this.setActionsWrapperRef}>
             <div
               className="tagging-actions-toggle"
               onClick={this.handleToggleActions}
