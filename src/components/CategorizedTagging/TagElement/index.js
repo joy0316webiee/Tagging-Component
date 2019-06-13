@@ -26,7 +26,7 @@ class TagElement extends Component {
 
   render() {
     // prettier-ignore
-    const { name, categories, categoryId, groups, groupId, description, keyword, visibility} = this.props;
+    const { name, categories, categoryId, groups, groupId, description, keyword, visibility, enabled} = this.props;
 
     const displayFilteredName = (name, keyword) => {
       const index = name.toLowerCase().indexOf(keyword.toLowerCase());

@@ -3,6 +3,7 @@ import AutosizeInput from 'react-input-autosize';
 import className from 'classnames';
 import TagElement from './TagElement';
 import CheckBox from './CheckBox';
+import ModalBox from './ModalBox';
 import axios from 'axios';
 
 import data from './colors.json';
@@ -24,7 +25,8 @@ class CategorizedTagging extends Component {
     errors: [],
     loading: false,
     toggleTagging: false,
-    toggleActions: false
+    toggleActions: false,
+    showModal: true
   };
 
   componentDidMount() {
@@ -120,6 +122,18 @@ class CategorizedTagging extends Component {
     });
   };
 
+  handleOpenModal = () => {
+    this.setState({
+      showModal: true
+    });
+  };
+
+  handleCloseModal = () => {
+    this.setState({
+      showModal: false
+    });
+  };
+
   setTaggingWrapperRef = node => {
     this.taggingWrapperRef = node;
   };
@@ -134,7 +148,7 @@ class CategorizedTagging extends Component {
 
   render() {
     // prettier-ignore
-    const { categories, groups, selectedTags, searchedTags, errors, loading, toggleTagging, toggleActions, keyword, visibility } = this.state;
+    const { categories, groups, selectedTags, searchedTags, errors, loading, toggleTagging, toggleActions, keyword, visibility, showModal } = this.state;
 
     const displayTaggingDropdown = () => {
       let categoriedTags = categories.reduce((acc, category) => {
@@ -177,7 +191,7 @@ class CategorizedTagging extends Component {
                   />
                 ))}
                 <div className="tagging-create">
-                  <button>
+                  <button onClick={this.handleOpenModal}>
                     create a new {item.category.name} "{keyword}"
                   </button>
                 </div>
@@ -262,6 +276,12 @@ class CategorizedTagging extends Component {
           </div>
         </div>
         {toggleTagging && displayTaggingDropdown()}
+        <ModalBox
+          isOpen={showModal}
+          categories={categories}
+          groups={groups}
+          handleCloseModal={this.handleCloseModal}
+        />
       </div>
     );
   }
