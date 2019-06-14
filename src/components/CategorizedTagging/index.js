@@ -26,7 +26,7 @@ class CategorizedTagging extends Component {
     loading: false,
     toggleTagging: false,
     toggleActions: false,
-    showModal: true
+    showModal: false
   };
 
   componentDidMount() {
@@ -75,19 +75,17 @@ class CategorizedTagging extends Component {
     });
   };
 
+  updateToggleState = (ref, target, state) => {
+    if (ref && !ref.contains(target)) {
+      this.setState({ [state]: false });
+    }
+  };
+
   handleClickOutside = event => {
-    if (
-      this.taggingWrapperRef &&
-      !this.taggingWrapperRef.contains(event.target)
-    ) {
-      this.setState({ toggleTagging: false });
-    }
-    if (
-      this.actionsWrapperRef &&
-      !this.actionsWrapperRef.contains(event.target)
-    ) {
-      this.setState({ toggleActions: false });
-    }
+    // prettier-ignore
+    this.updateToggleState(this.taggingWrapperRef, event.target, 'toggleTagging');
+    // prettier-ignore
+    this.updateToggleState(this.actionsWrapperRef, event.target, 'toggleActions');
   };
 
   handleClickTagElement = tag => {
@@ -124,7 +122,8 @@ class CategorizedTagging extends Component {
 
   handleOpenModal = () => {
     this.setState({
-      showModal: true
+      showModal: true,
+      toggleTagging: false
     });
   };
 

@@ -14,18 +14,6 @@ class ModalBox extends Component {
     groupId: ''
   };
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.categories.length !== prevProps.categories.length) {
-  //     this.setState({
-  //       categoryId: this.props.categories[0]._id
-  //     });
-  //   }
-  //   if (this.props.categories.length !== prevProps.categories.length) {
-  //     this.setState({
-  //       categoryId: this.props.categories[0]._id
-  //     });
-  //   }
-  // }
   handleChangeEnabled = value => {
     this.setState({ enabled: value });
   };
@@ -61,7 +49,7 @@ class ModalBox extends Component {
             <div className="category">
               <label>Category</label>
               <SelectBox
-                name="categoryId"
+                name="category"
                 value={categoryId}
                 options={categories}
                 onChangeCallback={this.handleChangeSelection}
@@ -70,7 +58,7 @@ class ModalBox extends Component {
             <div className="group">
               <label>Group</label>
               <SelectBox
-                name="groupId"
+                name="group"
                 value={groupId}
                 options={groups}
                 onChangeCallback={this.handleChangeSelection}

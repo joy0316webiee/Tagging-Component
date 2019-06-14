@@ -50,19 +50,19 @@
       > div {
         margin-bottom: 17px;
 
-        label {
+        > label {
           color: #747474;
           font-size: 15px;
           font-weight: 400;
           display: block;
         }
-        input {
+        > input {
           color: #000000;
           font-size: 18px;
           font-weight: 400;
           padding: 10px 17px;
         }
-        textarea {
+        > textarea {
           height: 73px;
           color: #000000;
           font-size: 14px;

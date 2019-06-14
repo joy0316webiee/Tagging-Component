@@ -23,7 +23,7 @@ class SwitchBox extends Component {
     const { enabled } = this.state;
 
     return (
-      <div className="container">
+      <div className="switchbox">
         <span className="track" />
         <span
           className={className('handle', { disabled: !enabled })}

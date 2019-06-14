@@ -36,3 +36,16 @@
     border-top: 1px solid lighten($color, 10%);
   }
 }
+
+@mixin coloredList($color) {
+  color: $color;
+
+  span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: $color;
+    margin-left: 10px;
+    display: inline-block;
+  }
+}
