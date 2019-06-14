@@ -17,7 +17,6 @@
     background-color: white;
     outline: none;
     width: 411px;
-    height: 610px;
     box-shadow: 0 3px 30px rgba(0, 0, 0, 0.25);
     border-radius: 7px;
     background-color: #ffffff;
@@ -69,6 +68,28 @@
           font-weight: 400;
           padding: 14px 17px;
           resize: none;
+        }
+        &.symbol {
+          .title {
+            margin-left: -8px;
+
+            label {
+              margin-left: 5px;
+            }
+          }
+          .image {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 5px;
+
+            img {
+              min-width: 70px;
+              height: 70px;
+              background-color: #ededed;
+              margin-right: 10px;
+            }
+          }
         }
         &.status {
           .switch {

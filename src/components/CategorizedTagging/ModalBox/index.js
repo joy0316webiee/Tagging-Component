@@ -3,6 +3,10 @@ import ReactModal from 'react-modal';
 import className from 'classnames';
 import SwitchBox from '../SwitchBox';
 import SelectBox from '../SelectBox';
+import CheckBox from '../CheckBox';
+import mime from 'mime-types';
+
+import { authorized, images } from '../constants.json';
 import './style.scss';
 
 ReactModal.setAppElement('#root');
@@ -11,7 +15,9 @@ class ModalBox extends Component {
   state = {
     enabled: true,
     categoryId: '',
-    groupId: ''
+    groupId: '',
+    hasImage: false,
+    imageId: -1
   };
 
   handleChangeEnabled = value => {
@@ -22,10 +28,35 @@ class ModalBox extends Component {
     this.setState({ [key]: value });
   };
 
+  handleChangeHasImage = (key, value) => {
+    this.setState({
+      [key]: value
+    });
+  };
+
   handleClickAction = () => {};
 
+  getImage = id => {
+    const filteredImages = images.filter(image => image.id === id);
+    if (filteredImages.length === 0) return '';
+
+    let filename = filteredImages[0].path;
+    if (!authorized.includes(mime.lookup(filename))) return '';
+
+    if (
+      !filename.toLowerCase().includes('http://') &&
+      !filename.toLowerCase().includes('https://')
+    ) {
+      filename = require.context('../../../assets/images', true)(
+        `./${filename}`
+      );
+    }
+
+    return filename;
+  };
+
   render() {
-    const { enabled, categoryId, groupId } = this.state;
+    const { enabled, categoryId, groupId, imageId, hasImage } = this.state;
     const { isOpen, categories, groups, handleCloseModal } = this.props;
 
     return (
@@ -45,6 +76,25 @@ class ModalBox extends Component {
             <div className="name">
               <label>Name</label>
               <input className="control" type="text" />
+            </div>
+            <div className="symbol">
+              <div className="title">
+                <CheckBox
+                  name="hasImage"
+                  checked={hasImage}
+                  onChange={this.handleChangeHasImage}
+                />
+                <label>Image</label>
+              </div>
+              <div className="image">
+                <img src={`${this.getImage(imageId)}`} alt="" />
+                <SelectBox
+                  name="image"
+                  value={imageId}
+                  options={images}
+                  onChangeCallback={this.handleChangeSelection}
+                />
+              </div>
             </div>
             <div className="category">
               <label>Category</label>

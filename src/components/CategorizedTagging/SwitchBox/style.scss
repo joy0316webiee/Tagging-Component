@@ -4,6 +4,8 @@
   display: flex;
   align-items: center;
   position: relative;
+  padding: 8px 0px;
+  cursor: pointer;
 
   .track {
     width: 28px;
@@ -20,7 +22,6 @@
     right: 0;
     transform: translate(50%, 0);
     transition: all 0.15s ease-out;
-    cursor: pointer;
 
     &.disabled {
       background-color: #b2b2b2;

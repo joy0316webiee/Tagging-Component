@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import ImgUnion from '../../../assets/images/ic_union.png';
 
-import data from '../colors.json';
+import { colors } from '../constants.json';
 import './style.scss';
 
 class TagElement extends Component {
   getChildById = (children, id) => {
-    const index = children.findIndex(item => item._id === id);
+    const index = children.findIndex(item => item.id === id);
     return children[index];
   };
 
   getTagClass = () => {
     const { categories, categoryId } = this.props;
     const { colorId } = categories.filter(
-      category => category._id === categoryId
+      category => category.id === categoryId
     )[0];
-    return data.colors.filter(color => color.id === colorId)[0].class;
+    return colors.filter(color => color.id === colorId)[0].class;
   };
 
   handleClickSelf = event => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import className from 'classnames';
 
-import data from '../colors.json';
+import { colors } from '../constants.json';
 import './style.scss';
 
 class SelectBox extends Component {
@@ -14,7 +14,7 @@ class SelectBox extends Component {
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
-    this.handleChange(0);
+    // this.handleChange(0);
   }
 
   componentWillUnmount() {
@@ -29,7 +29,7 @@ class SelectBox extends Component {
         listOpen: false
       },
       () => {
-        onChangeCallback(`${name}Id`, options[index] && options[index]._id);
+        onChangeCallback(`${name}Id`, options[index] && options[index].id);
       }
     );
   };
@@ -66,7 +66,7 @@ class SelectBox extends Component {
   getColorClass = (name, option) => {
     if (name !== 'category' || !option) return '';
 
-    return data.colors.filter(color => color.id === option.colorId)[0].class;
+    return colors.filter(color => color.id === option.colorId)[0].class;
   };
 
   render() {
@@ -92,7 +92,7 @@ class SelectBox extends Component {
       <div className="selectbox" ref={this.setWrapperRef}>
         <div className="header" onClick={this.toggleList}>
           <label className={className(`${this.getColorClass(name, selected)}`)}>
-            {selected && selected.name}
+            {selected ? selected.name : <span>Select</span>}
           </label>
         </div>
         {listOpen && (

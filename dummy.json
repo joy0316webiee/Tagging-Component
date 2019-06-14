@@ -2,34 +2,34 @@
   "data": {
     "categories": [
       {
-        "_id": "dsf87ds78a7",
+        "id": "dsf87ds78a7",
         "name": "Safety",
         "colorId": 1
       },
       {
-        "_id": "gfd8dsf67s8",
+        "id": "gfd8dsf67s8",
         "name": "Job Feature",
         "colorId": 12
       },
       {
-        "_id": "gfd8ssf67s8",
+        "id": "gfd8ssf67s8",
         "name": "Salary",
         "colorId": 3
       }
     ],
     "groups": [
       {
-        "_id": "bv8sda6a6s98s",
+        "id": "bv8sda6a6s98s",
         "name": "LV"
       },
       {
-        "_id": "bs9s8x6x8sd9a",
+        "id": "bs9s8x6x8sd9a",
         "name": "HV"
       }
     ],
     "tags": [
       {
-        "_id": "asd90sa98sd9",
+        "id": "asd90sa98sd9",
         "name": "Warning",
         "categoryId": "gfd8dsf67s8",
         "groupId": "bv8sda6a6s98s",
@@ -37,7 +37,7 @@
         "enabled": true
       },
       {
-        "_id": "9asd87sad7jnd",
+        "id": "9asd87sad7jnd",
         "name": "Scaffolds",
         "categoryId": "dsf87ds78a7",
         "groupId": "bs9s8x6x8sd9a",
@@ -45,7 +45,7 @@
         "enabled": true
       },
       {
-        "_id": "d09d8776d6s8",
+        "id": "d09d8776d6s8",
         "name": "Salary",
         "categoryId": "gfd8dsf67s8",
         "groupId": "bv8sda6a6s98s",
@@ -53,7 +53,7 @@
         "enabled": true
       },
       {
-        "_id": "asd90sa98sd9",
+        "id": "asd90sa98sd9",
         "name": "Class",
         "categoryId": "dsf87ds78a7",
         "groupId": "bs9s8x6x8sd9a",

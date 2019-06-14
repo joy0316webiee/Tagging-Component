@@ -1,6 +1,7 @@
 @import '../../../assets/scss/base.scss';
 
 .selectbox {
+  width: 100%;
   margin-top: 5px;
   position: relative;
 
@@ -60,6 +61,10 @@
 
     label {
       font-size: 16px;
+
+      span {
+        color: #b2b2b2;
+      }
     }
   }
   .content {

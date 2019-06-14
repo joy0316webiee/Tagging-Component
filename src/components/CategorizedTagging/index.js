@@ -6,7 +6,7 @@ import CheckBox from './CheckBox';
 import ModalBox from './ModalBox';
 import axios from 'axios';
 
-import data from './colors.json';
+import { colors } from './constants.json';
 import './style.scss';
 
 class CategorizedTagging extends Component {
@@ -142,7 +142,7 @@ class CategorizedTagging extends Component {
   };
 
   getCategoryClass = category => {
-    return data.colors.filter(color => color.id === category.colorId)[0].class;
+    return colors.filter(color => color.id === category.colorId)[0].class;
   };
 
   render() {
@@ -152,7 +152,7 @@ class CategorizedTagging extends Component {
     const displayTaggingDropdown = () => {
       let categoriedTags = categories.reduce((acc, category) => {
         const filteredTags = searchedTags.filter(tag => {
-          return tag.categoryId === category._id;
+          return tag.categoryId === category.id;
         });
 
         const categoriedTag = {
@@ -180,7 +180,7 @@ class CategorizedTagging extends Component {
               <div className="tagging-group">
                 {item.tags.map(tag => (
                   <TagElement
-                    key={tag._id}
+                    key={tag.id}
                     categories={categories}
                     groups={groups}
                     keyword={keyword}
