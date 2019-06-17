@@ -14,28 +14,38 @@ class SelectBox extends Component {
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
-    // this.handleChange(0);
+    this.setDefaultSelected();
   }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
+  setDefaultSelected = () => {
+    const { value, options } = this.props;
+    if (value.length === 0) return;
+
+    this.setState({
+      selected: options.filter(option => option.id === value)[0]
+    });
+  };
+
   handleChange = index => {
-    const { name, options, onChangeCallback } = this.props;
+    const { name, options, onError, onChangeCallback } = this.props;
     this.setState(
       {
         selected: options[index],
         listOpen: false
       },
       () => {
+        onError(`${name}Id`, false);
         onChangeCallback(`${name}Id`, options[index] && options[index].id);
       }
     );
   };
 
   handleClickOutside = event => {
-    if (this.WrapperRef && !this.WrapperRef.contains(event.target)) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.setState({
         listOpen: false
       });
@@ -54,7 +64,7 @@ class SelectBox extends Component {
   };
 
   setWrapperRef = node => {
-    this.WrapperRef = node;
+    this.wrapperRef = node;
   };
 
   toggleList = () => {
@@ -70,7 +80,7 @@ class SelectBox extends Component {
   };
 
   render() {
-    const { name } = this.props;
+    const { name, classes } = this.props;
     const { filter, filteredOptions, listOpen, selected } = this.state;
 
     const displayOptions = () =>
@@ -90,7 +100,7 @@ class SelectBox extends Component {
 
     return (
       <div className="selectbox" ref={this.setWrapperRef}>
-        <div className="header" onClick={this.toggleList}>
+        <div className={className('header', classes)} onClick={this.toggleList}>
           <label className={className(`${this.getColorClass(name, selected)}`)}>
             {selected ? selected.name : <span>Select</span>}
           </label>

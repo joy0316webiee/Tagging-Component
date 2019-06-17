@@ -10,13 +10,13 @@
   .track {
     width: 28px;
     height: 1px;
-    background-color: #707070;
+    background-color: $grey-dark;
     display: inline-block;
   }
   .handle {
     width: 18px;
     height: 18px;
-    background-color: #02a107;
+    background-color: $green-primary;
     border-radius: 50%;
     position: absolute;
     right: 0;
@@ -24,7 +24,7 @@
     transition: all 0.15s ease-out;
 
     &.disabled {
-      background-color: #b2b2b2;
+      background-color: $grey;
       left: 0;
       transform: translate(-50%, 0);
     }

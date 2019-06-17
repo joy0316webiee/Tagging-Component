@@ -49,3 +49,8 @@
     display: inline-block;
   }
 }
+
+@mixin error {
+  transition: all 0.2s ease-out;
+  border: 1px solid $red-light;
+}

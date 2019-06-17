@@ -16,17 +16,17 @@ class CategorizedTagging extends Component {
     tags: [],
     selectedTags: [],
     searchedTags: [],
+    activeTag: null,
     visibility: {
       category: true,
       group: true,
       description: false
     },
     keyword: '',
-    errors: [],
-    loading: false,
     toggleTagging: false,
     toggleActions: false,
-    showModal: false
+    showModal: false,
+    editable: false
   };
 
   componentDidMount() {
@@ -120,8 +120,10 @@ class CategorizedTagging extends Component {
     });
   };
 
-  handleOpenModal = () => {
+  handleOpenCreateModal = () => {
     this.setState({
+      editable: false,
+      activeTag: null,
       showModal: true,
       toggleTagging: false
     });
@@ -131,6 +133,36 @@ class CategorizedTagging extends Component {
     this.setState({
       showModal: false
     });
+  };
+
+  handleSubmitTag = newTag => {
+    console.log(newTag);
+    let { editable, selectedTags } = this.state;
+
+    if (editable)
+      selectedTags = selectedTags.filter(tag => tag.id !== newTag.id);
+    this.setState({
+      showModal: false,
+      selectedTags: selectedTags.concat(newTag)
+    });
+  };
+
+  handleTagAction = (index, action) => {
+    let { selectedTags } = this.state;
+
+    if (action === 'delete') {
+      selectedTags.splice(index, 1);
+      this.setState({ selectedTags });
+    } else if (action === 'disable') {
+      selectedTags[index].enabled = !selectedTags[index].enabled;
+      this.setState({ selectedTags });
+    } else if (action === 'edit') {
+      this.setState({
+        activeTag: selectedTags[index],
+        editable: true,
+        showModal: true
+      });
+    }
   };
 
   setTaggingWrapperRef = node => {
@@ -147,7 +179,7 @@ class CategorizedTagging extends Component {
 
   render() {
     // prettier-ignore
-    const { categories, groups, selectedTags, searchedTags, errors, loading, toggleTagging, toggleActions, keyword, visibility, showModal } = this.state;
+    const { categories, groups, activeTag, selectedTags, searchedTags, toggleTagging, toggleActions, keyword, visibility, showModal, editable} = this.state;
 
     const displayTaggingDropdown = () => {
       let categoriedTags = categories.reduce((acc, category) => {
@@ -190,7 +222,7 @@ class CategorizedTagging extends Component {
                   />
                 ))}
                 <div className="tagging-create">
-                  <button onClick={this.handleOpenModal}>
+                  <button onClick={() => this.handleOpenCreateModal()}>
                     create a new {item.category.name} "{keyword}"
                   </button>
                 </div>
@@ -242,11 +274,14 @@ class CategorizedTagging extends Component {
             {selectedTags.map((tag, index) => (
               <TagElement
                 key={index}
+                editable
                 categories={categories}
                 groups={groups}
                 keyword=""
                 visibility={visibility}
                 {...tag}
+                index={index}
+                onAction={this.handleTagAction}
               />
             ))}
             <div className="tagging-search">
@@ -279,6 +314,9 @@ class CategorizedTagging extends Component {
           isOpen={showModal}
           categories={categories}
           groups={groups}
+          tagInfo={activeTag}
+          editable={editable}
+          onSubmit={this.handleSubmitTag}
           handleCloseModal={this.handleCloseModal}
         />
       </div>

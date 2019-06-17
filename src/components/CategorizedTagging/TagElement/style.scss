@@ -55,6 +55,9 @@
   &.red-dark {
     @include coloredTag($red-dark);
   }
+  &.disabled {
+    @include coloredTag($grey);
+  }
 
   .tag-header {
     flex: 1;
@@ -70,7 +73,7 @@
       margin: 0 auto;
 
       span {
-        color: white;
+        color: $white;
         font-size: 12px;
         margin-left: 3px;
       }
@@ -80,7 +83,7 @@
       margin: 0 auto;
 
       span {
-        color: white;
+        color: $white;
         font-size: 12px;
       }
     }
@@ -94,10 +97,10 @@
 
       p {
         margin: 0;
-        color: white;
+        color: $white;
         font-size: 12px;
         text-overflow: ellipsis;
-        white-space: nowrap;
+        $white-space: nowrap;
         overflow: hidden;
       }
     }
@@ -113,35 +116,64 @@
       display: inline-block;
 
       span {
-        color: white;
+        color: $white;
         font-size: 14px;
         font-weight: 500;
 
         strong {
-          color: white;
+          color: $white;
           text-decoration: underline;
         }
       }
     }
     .tag-actions {
-      padding: 0px 2px;
-      position: absolute;
-      right: 3px;
-      bottom: 3px;
-      cursor: pointer;
+      position: relative;
 
-      &:hover {
+      .toggle {
+        padding: 0px;
+        position: absolute;
+        right: 3px;
+        bottom: 3px;
+        cursor: pointer;
+
+        &:hover {
+          span {
+            background-color: darken(white, 10%);
+          }
+        }
         span {
-          background-color: darken(white, 10%);
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background-color: $white;
+          display: block;
+          margin-top: 1px;
         }
       }
-      span {
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        background-color: white;
-        display: block;
-        margin-top: 1px;
+      ul {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 7px);
+        background-color: $white;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        border-radius: 3px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        z-index: 5;
+        cursor: pointer;
+
+        li {
+          font-size: 14px;
+          padding: 5px 10px;
+
+          &:hover {
+            background-color: darken(white, 5%);
+          }
+          &.delete {
+            color: $red !important;
+          }
+        }
       }
     }
   }

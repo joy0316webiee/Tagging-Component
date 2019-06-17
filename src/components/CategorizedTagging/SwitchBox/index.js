@@ -5,16 +5,18 @@ import './style.scss';
 
 class SwitchBox extends Component {
   state = {
-    enabled: true
+    enabled: this.props.value
   };
 
   handleChange = () => {
+    const { name, handleChange } = this.props;
+
     this.setState(
       {
         enabled: !this.state.enabled
       },
       () => {
-        this.props.handleChange(this.state.enabled);
+        handleChange(name, this.state.enabled);
       }
     );
   };

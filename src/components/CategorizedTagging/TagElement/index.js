@@ -6,17 +6,57 @@ import { colors } from '../constants.json';
 import './style.scss';
 
 class TagElement extends Component {
+  state = {
+    toggle: false
+  };
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  handleClickOutside = event => {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.setState({
+        toggle: false
+      });
+    }
+  };
+
+  setWrapperRef = node => {
+    this.wrapperRef = node;
+  };
+
   getChildById = (children, id) => {
     const index = children.findIndex(item => item.id === id);
     return children[index];
   };
 
   getTagClass = () => {
-    const { categories, categoryId } = this.props;
+    const { categories, categoryId, enabled } = this.props;
+    if (!enabled) return 'disabled';
+
     const { colorId } = categories.filter(
       category => category.id === categoryId
     )[0];
     return colors.filter(color => color.id === colorId)[0].class;
+  };
+
+  toggleActions = () => {
+    this.setState({
+      toggle: !this.state.toggle
+    });
+  };
+
+  handleAction = action => {
+    const { index, onAction } = this.props;
+    this.setState({
+      toggle: false
+    });
+    onAction(index, action);
   };
 
   handleClickSelf = event => {
@@ -26,7 +66,8 @@ class TagElement extends Component {
 
   render() {
     // prettier-ignore
-    const { name, categories, categoryId, groups, groupId, description, keyword, visibility, enabled} = this.props;
+    const { name, categories, categoryId, groups, groupId, description, keyword, visibility, enabled, editable } = this.props;
+    const { toggle } = this.state;
 
     const displayFilteredName = (name, keyword) => {
       const index = name.toLowerCase().indexOf(keyword.toLowerCase());
@@ -67,11 +108,37 @@ class TagElement extends Component {
               }}
             />
           </div>
-          <div className="tag-actions">
-            {[...Array(3)].map((_, i) => (
-              <span className="round" key={i} />
-            ))}
-          </div>
+          {editable && (
+            <div className="tag-actions" ref={this.setWrapperRef}>
+              <div className="toggle" onClick={this.toggleActions}>
+                {[...Array(3)].map((_, i) => (
+                  <span className="round" key={i} />
+                ))}
+              </div>
+              {toggle && ( // prettier-ignore
+                <ul className="dropdown">
+                  <li
+                    className="edit"
+                    onClick={() => this.handleAction('edit')}
+                  >
+                    Edit
+                  </li>
+                  <li
+                    className="disable"
+                    onClick={() => this.handleAction('disable')}
+                  >
+                    {enabled ? 'Disable' : 'Enable'}
+                  </li>
+                  <li
+                    className="delete"
+                    onClick={() => this.handleAction('delete')}
+                  >
+                    Delete
+                  </li>
+                </ul>
+              )}
+            </div>
+          )}
         </div>
       </div>
     );

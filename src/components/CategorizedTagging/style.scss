@@ -6,7 +6,7 @@
 
   .tagging-box {
     position: relative;
-    background-color: #f2f2f2;
+    background-color: $grey-light;
     display: flex;
     padding-left: 13px;
     padding-right: 20px;
@@ -22,7 +22,7 @@
           max-width: 540px;
           font-size: 23px;
           border: none;
-          background-color: #f2f2f2;
+          background-color: $grey-light;
         }
       }
     }
@@ -52,7 +52,7 @@
         position: absolute;
         right: 0;
         top: calc(100% + 7px);
-        background-color: white;
+        background-color: $white;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
         border-radius: 3px;
 
@@ -62,7 +62,7 @@
           h1 {
             font-size: 19px;
             font-weight: bold;
-            color: #000000;
+            color: $black;
             margin-top: 0;
           }
           > div {
@@ -80,23 +80,23 @@
   }
   .tagging-dropdown {
     margin-top: 20px;
-    border: 1px solid #f0f0f0;
+    border: 1px solid $grey-lighter;
     position: relative;
-    background-color: #fefefe;
+    background-color: $grey-light;
     padding: 15px 19px;
 
     &::before {
       content: '';
       width: 20px;
       height: 20px;
-      border-top: 1px solid #f0f0f0;
-      border-left: 1px solid #f0f0f0;
+      border-top: 1px solid $grey-lighter;
+      border-left: 1px solid $grey-lighter;
       display: block;
       position: absolute;
       left: 20px;
       top: -10px;
       transform: rotate(45deg);
-      background-color: #fefefe;
+      background-color: $grey-light;
     }
 
     .tagging-categorized-group {
@@ -160,8 +160,9 @@
 
           button {
             font-family: $segoe-regular;
+            background-color: $grey-light;
             border: none;
-            color: #0e52b9;
+            color: $blue-dark;
             font-size: 16px;
             cursor: pointer;
           }
