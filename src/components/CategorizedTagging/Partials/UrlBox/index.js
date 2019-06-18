@@ -117,4 +117,4 @@ class UrlBox extends Component {
   }
 }
 
-export default UrlBox;
+export { UrlBox };

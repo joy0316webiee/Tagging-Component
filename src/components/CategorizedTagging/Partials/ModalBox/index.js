@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import className from 'classnames';
-import SwitchBox from '../SwitchBox';
-import SelectBox from '../SelectBox';
-import CheckBox from '../CheckBox';
-import UrlBox from '../UrlBox';
 import uuidv4 from 'uuid/v4';
+import { SwitchBox, SelectBox, CheckBox, UrlBox } from '../../Partials';
 
 import './style.scss';
 
@@ -229,4 +226,4 @@ class ModalBox extends Component {
   }
 }
 
-export default ModalBox;
+export { ModalBox };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import className from 'classnames';
 
-import { colors } from '../constants.json';
+import { colors } from '../../constants.json';
 import './style.scss';
 
 class SelectBox extends Component {
@@ -127,4 +127,4 @@ class SelectBox extends Component {
   }
 }
 
-export default SelectBox;
+export { SelectBox };

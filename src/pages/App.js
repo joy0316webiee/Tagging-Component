@@ -1,23 +1,53 @@
 import React, { Component } from 'react';
-import { CategorizedTagging } from '../components';
+import { EntryTagging, NodeTagging } from '../components';
 
 import './App.scss';
 
 class App extends Component {
+  state = {
+    entryTags: []
+  };
+
+  handleInitTags = tags => {
+    this.setState({
+      entryTags: [...this.state.entryTags, ...tags]
+    });
+  };
+
+  handleAddEntryTag = newTag => {
+    this.setState({
+      entryTags: this.state.entryTags.concat(newTag)
+    });
+  };
+
   render() {
+    const { entryTags } = this.state;
+
     return (
       <div className="app-wrapper">
         <div className="app">
           <div className="app-header">
-            <h1 className="title">react-categorized-tag-input</h1>
-            <p className="desc">
-              React.js component for making tag autocompletion inputs with
-              categorized results with no dependencies and 10KB minified.
-            </p>
-            <p className="hint">Go ahead, type "a".</p>
+            <EntryTagging tags={entryTags} onAddTag={this.handleAddEntryTag} />
           </div>
           <div className="app-content">
-            <CategorizedTagging />
+            <div className="tagging-wrapper">
+              <NodeTagging
+                onFetchTags={this.handleInitTags}
+                onAddTag={this.handleAddEntryTag}
+              />
+            </div>
+            <div className="tagging-wrapper">
+              <NodeTagging
+                onFetchTags={this.handleInitTags}
+                onAddTag={this.handleAddEntryTag}
+              />
+            </div>
+            <div className="tagging-wrapper">
+              <NodeTagging
+                onFetchTags={this.handleInitTags}
+                onAddTag={this.handleAddEntryTag}
+              />
+            </div>
           </div>
         </div>
       </div>

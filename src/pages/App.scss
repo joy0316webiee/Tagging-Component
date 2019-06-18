@@ -3,20 +3,21 @@
 .app-wrapper {
   height: 100vh;
   width: 100%;
-  // padding-top: 264px;
 
   .app {
-    width: 700px;
     margin: 0 auto;
     text-align: center;
 
     .app-header {
-      h1 {
-        font-size: 50px;
-        color: $purple;
-      }
-      p {
-        font-size: 23px;
+      margin-top: 20px;
+    }
+    .app-content {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+
+      .tagging-wrapper {
+        padding: 20px;
       }
     }
   }

@@ -1,0 +1,159 @@
+@import '../../../assets/scss/base.scss';
+
+.entry-tagging {
+  margin: 0 auto;
+  padding: 0 20px;
+
+  .tagging-box {
+    position: relative;
+    background-color: $grey-light;
+    display: flex;
+    padding-left: 13px;
+    padding-right: 20px;
+
+    .tagging-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 7px 0px;
+
+      .tagging-search {
+        input {
+          max-width: 540px;
+          font-size: 23px;
+          border: none;
+          background-color: $grey-light;
+        }
+      }
+    }
+    .tagging-actions {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translate(0, -50%);
+      cursor: pointer;
+      z-index: 1;
+
+      .tagging-actions-toggle {
+        height: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        span {
+          width: 5px;
+          height: 5px;
+          background-color: lighten(grey, 20%);
+          border-radius: 50%;
+          display: block;
+        }
+      }
+      .tagging-actions-menu {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 7px);
+        background-color: $white;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        border-radius: 3px;
+
+        .visibility {
+          padding: 15px 10px 20px;
+
+          h1 {
+            font-size: 19px;
+            font-weight: bold;
+            color: $black;
+            margin-top: 0;
+          }
+          > div {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+
+            span {
+              margin-left: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .tagging-dropdown {
+    margin-top: 2px;
+    border: 1px solid $grey-lighter;
+    position: relative;
+    background-color: $grey-light;
+    padding: 15px 19px;
+
+    .tagging-categorized-group {
+      text-align: left;
+      margin-bottom: 10px;
+
+      .tagging-category {
+        &.green-secondary {
+          @include coloredCategory($green-secondary);
+        }
+        &.pink {
+          @include coloredCategory($pink);
+        }
+        &.yellow-dark {
+          @include coloredCategory($yellow-dark);
+        }
+        &.green-dark {
+          @include coloredCategory($green-dark);
+        }
+        &.blue-light {
+          @include coloredCategory($blue-light);
+        }
+        &.black {
+          @include coloredCategory($black);
+        }
+        &.yellow-light {
+          @include coloredCategory($yellow-light);
+        }
+        &.blue-darker {
+          @include coloredCategory($blue-darker);
+        }
+        &.brown {
+          @include coloredCategory($brown);
+        }
+        &.red {
+          @include coloredCategory($red);
+        }
+        &.red-lighter {
+          @include coloredCategory($red-lighter);
+        }
+        &.pink-dark {
+          @include coloredCategory($pink-dark);
+        }
+        &.green-light {
+          @include coloredCategory($green-light);
+        }
+        &.green-darker {
+          @include coloredCategory($green-darker);
+        }
+        &.red-dark {
+          @include coloredCategory($red-dark);
+        }
+      }
+      .tagging-group {
+        display: flex;
+        align-items: center;
+        margin-top: 5px;
+
+        .tagging-create {
+          display: inline-block;
+
+          button {
+            font-family: $segoe-regular;
+            background-color: $grey-light;
+            border: none;
+            color: $blue-dark;
+            font-size: 16px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

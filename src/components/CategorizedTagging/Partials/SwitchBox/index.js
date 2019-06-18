@@ -33,4 +33,4 @@ class SwitchBox extends Component {
   }
 }
 
-export default SwitchBox;
+export { SwitchBox };

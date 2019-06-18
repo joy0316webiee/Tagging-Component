@@ -1,4 +1,4 @@
-@import '../../../assets/scss/base.scss';
+@import '../../../../assets/scss/base.scss';
 
 .selectbox {
   width: 100%;
@@ -52,7 +52,8 @@
   }
 
   .header {
-    background: $white url('../../../assets/images/arrow.svg') no-repeat 95% 50%;
+    background: $white url('../../../../assets/images/arrow.svg') no-repeat 95%
+      50%;
     width: 100%;
     height: 41px;
     border: 1px solid $grey-lighter;
@@ -83,8 +84,8 @@
     padding: 9px 13px;
 
     input {
-      background: $white url('../../../assets/images/ic_search.png') no-repeat
-        2.5% 50%;
+      background: $white url('../../../../assets/images/ic_search.png')
+        no-repeat 2.5% 50%;
       background-size: 10px 10px;
       width: 100%;
       height: 28px;

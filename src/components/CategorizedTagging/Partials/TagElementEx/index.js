@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import ImgUnion from '../../../assets/images/ic_union.png';
+import ImgUnion from '../../../../assets/images/ic_union.png';
 
-import { colors } from '../constants.json';
+import { colors } from '../../constants.json';
 import './style.scss';
 
-class TagElement extends Component {
+class TagElementEx extends Component {
   state = {
     toggle: false
   };
@@ -145,4 +145,4 @@ class TagElement extends Component {
   }
 }
 
-export default TagElement;
+export { TagElementEx };

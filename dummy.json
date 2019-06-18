@@ -8,13 +8,13 @@
       },
       {
         "id": "gfd8dsf67s8",
-        "name": "Job Feature",
+        "name": "Feature",
         "colorId": 12
       },
       {
         "id": "gfd8ssf67s8",
         "name": "Salary",
-        "colorId": 3
+        "colorId": 2
       }
     ],
     "groups": [
@@ -37,6 +37,22 @@
         "enabled": true
       },
       {
+        "id": "a98s98afa9sd8",
+        "name": "Mimea",
+        "categoryId": "gfd8dsf67s8",
+        "groupId": "bv8sda6a6s98s",
+        "description": "about Mime",
+        "enabled": true
+      },
+      {
+        "id": "g90a98asd9sa90d",
+        "name": "Salary",
+        "categoryId": "gfd8dsf67s8",
+        "groupId": "bv8sda6a6s98s",
+        "description": "about Salary",
+        "enabled": false
+      },
+      {
         "id": "9asd87sad7jnd",
         "name": "Scaffolds",
         "categoryId": "dsf87ds78a7",
@@ -45,17 +61,41 @@
         "enabled": true
       },
       {
-        "id": "d09d8776d6s8",
-        "name": "Salary",
-        "categoryId": "gfd8dsf67s8",
-        "groupId": "bv8sda6a6s98s",
-        "description": "about Salary",
-        "enabled": false
+        "id": "d0sd98a787a9a9",
+        "name": "Futurea",
+        "categoryId": "dsf87ds78a7",
+        "groupId": "bs9s8x6x8sd9a",
+        "description": "about Future",
+        "enabled": true
       },
       {
-        "id": "asd90sa98sd9",
+        "id": "g90a98sasd9asd",
         "name": "Class",
         "categoryId": "dsf87ds78a7",
+        "groupId": "bs9s8x6x8sd9a",
+        "description": "about Class",
+        "enabled": true
+      },
+      {
+        "id": "9asd87sad7jnd",
+        "name": "Scaffolds",
+        "categoryId": "gfd8ssf67s8",
+        "groupId": "bs9s8x6x8sd9a",
+        "description": "about Scaffolds",
+        "enabled": true
+      },
+      {
+        "id": "d0sd98a787a9a9",
+        "name": "Futurea",
+        "categoryId": "gfd8ssf67s8",
+        "groupId": "bs9s8x6x8sd9a",
+        "description": "about Future",
+        "enabled": true
+      },
+      {
+        "id": "g90a98sasd9asd",
+        "name": "Class",
+        "categoryId": "gfd8ssf67s8",
         "groupId": "bs9s8x6x8sd9a",
         "description": "about Class",
         "enabled": true
