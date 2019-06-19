@@ -21,14 +21,16 @@ class ModalBox extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.tagInfo !== nextProps.tagInfo) {
-      if (!nextProps.isOpen) {
-        this.clearStates();
-      } else {
-        this.setState({
-          ...nextProps.tagInfo
-        });
-      }
+    if (!nextProps.isOpen) {
+      this.clearStates();
+    } else if (this.props.tagInfo !== nextProps.tagInfo) {
+      this.setState({
+        ...nextProps.tagInfo
+      });
+    } else if (this.props.errors !== nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
     }
   }
 

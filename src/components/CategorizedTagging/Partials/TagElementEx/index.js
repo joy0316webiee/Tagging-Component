@@ -66,7 +66,7 @@ class TagElementEx extends Component {
 
   render() {
     // prettier-ignore
-    const { name, categories, categoryId, groups, groupId, description, keyword, visibility, enabled, editable } = this.props;
+    const { name, categories, categoryId, groups, groupId, description, keyword, imgUrl, visibility, enabled, editable } = this.props;
     const { toggle } = this.state;
 
     const displayFilteredName = (name, keyword) => {
@@ -77,68 +77,75 @@ class TagElementEx extends Component {
 
     return (
       <div
-        className={classNames('tag-container', `${this.getTagClass()}`)}
+        className={classNames('tagex-container', `${this.getTagClass()}`)}
         onClick={this.handleClickSelf}
       >
-        <div className="tag-header">
-          {visibility.group && (
-            <div className="tag-group">
-              <img src={ImgUnion} alt="union" />
-              <span>{this.getChildById(groups, groupId).name}</span>
-            </div>
-          )}
-          {visibility.category && (
-            <div className="tag-category">
-              <span>{this.getChildById(categories, categoryId).name}</span>
-            </div>
-          )}
-        </div>
-        {visibility.description && (
-          <div className="tag-content">
-            <div className="tag-description">
-              <p>{description}</p>
-            </div>
+        {imgUrl && (
+          <div className="tag-image">
+            <img src={imgUrl} alt="tagex" />
           </div>
         )}
-        <div className="tag-footer">
-          <div className="tag-name">
-            <span
-              dangerouslySetInnerHTML={{
-                __html: displayFilteredName(name, keyword)
-              }}
-            />
-          </div>
-          {editable && (
-            <div className="tag-actions" ref={this.setWrapperRef}>
-              <div className="toggle" onClick={this.toggleActions}>
-                {[...Array(3)].map((_, i) => (
-                  <span className="round" key={i} />
-                ))}
+        <div className="tag-details">
+          <div className="tag-header">
+            {visibility.group && (
+              <div className="tag-group">
+                <img src={ImgUnion} alt="union" />
+                <span>{this.getChildById(groups, groupId).name}</span>
               </div>
-              {toggle && ( // prettier-ignore
-                <ul className="dropdown">
-                  <li
-                    className="edit"
-                    onClick={() => this.handleAction('edit')}
-                  >
-                    Edit
-                  </li>
-                  <li
-                    className="disable"
-                    onClick={() => this.handleAction('disable')}
-                  >
-                    {enabled ? 'Disable' : 'Enable'}
-                  </li>
-                  <li
-                    className="delete"
-                    onClick={() => this.handleAction('delete')}
-                  >
-                    Delete
-                  </li>
-                </ul>
-              )}
+            )}
+            {visibility.category && (
+              <div className="tag-category">
+                <span>{this.getChildById(categories, categoryId).name}</span>
+              </div>
+            )}
+          </div>
+          {visibility.description && (
+            <div className="tag-content">
+              <div className="tag-description">
+                <p>{description}</p>
+              </div>
             </div>
           )}
+          <div className="tag-footer">
+            <div className="tag-name">
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: displayFilteredName(name, keyword)
+                }}
+              />
+            </div>
+            {editable && (
+              <div className="tag-actions" ref={this.setWrapperRef}>
+                <div className="toggle" onClick={this.toggleActions}>
+                  {[...Array(3)].map((_, i) => (
+                    <span className="round" key={i} />
+                  ))}
+                </div>
+                {toggle && ( // prettier-ignore
+                  <ul className="dropdown">
+                    <li
+                      className="edit"
+                      onClick={() => this.handleAction('edit')}
+                    >
+                      Edit
+                    </li>
+                    <li
+                      className="disable"
+                      onClick={() => this.handleAction('disable')}
+                    >
+                      {enabled ? 'Disable' : 'Enable'}
+                    </li>
+                    <li
+                      className="delete"
+                      onClick={() => this.handleAction('delete')}
+                    >
+                      Delete
+                    </li>
+                  </ul>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );

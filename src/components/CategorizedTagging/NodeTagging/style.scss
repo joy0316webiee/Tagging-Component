@@ -154,6 +154,7 @@
         display: flex;
         align-items: center;
         margin-top: 5px;
+        flex-wrap: wrap;
 
         .tagging-create {
           display: inline-block;

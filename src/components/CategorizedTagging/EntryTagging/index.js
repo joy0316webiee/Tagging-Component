@@ -24,6 +24,7 @@ class EntryTagging extends Component {
     showModal: false,
     editable: false,
     errors: [],
+    modalErrors: [],
     loading: false
   };
 
@@ -117,11 +118,15 @@ class EntryTagging extends Component {
     });
   };
 
-  handleOpenCreateModal = () => {
+  handleOpenCreateModal = (categoryId, name) => {
     this.setState({
       editable: false,
-      activeTag: null,
-      showModal: true
+      activeTag: {
+        categoryId,
+        name
+      },
+      showModal: true,
+      modalErrors: []
     });
   };
 
@@ -131,24 +136,46 @@ class EntryTagging extends Component {
     });
   };
 
+  replaceInArray = (arry, newItem) => {
+    const editIndex = arry.findIndex(item => item.id === newItem.id);
+    arry.splice(editIndex, 1, newItem);
+    return arry;
+  };
+
   handleSubmitTag = newTag => {
     let { editable, selectedTags, tags } = this.state;
 
     if (editable) {
-      selectedTags = selectedTags.filter(tag => tag.id !== newTag.id);
+      const updatedTags = selectedTags.reduce((acc, tag) => {
+        if (tag.id === newTag.id) {
+          acc.push(newTag);
+        } else acc.push(tag);
+
+        return acc;
+      }, []);
+
       this.setState({
         showModal: false,
-        selectedTags: selectedTags.concat(newTag),
+        selectedTags: updatedTags,
+        tags: this.replaceInArray(tags, newTag),
         keyword: ''
       });
     } else {
-      this.setState({
-        showModal: false,
-        tags: tags.concat(newTag),
-        selectedTags: selectedTags.concat(newTag),
-        keyword: ''
-      });
-      this.props.onAddTag(newTag);
+      // prettier-ignore
+      if (tags.findIndex(tag => tag.name === newTag.name && tag.categoryId === newTag.categoryId) < 0) {
+        this.setState({
+          showModal: false,
+          tags: tags.concat(newTag),
+          selectedTags: selectedTags.concat(newTag),
+          keyword: ''
+        });
+        this.props.onAddTag(newTag);
+      } else {
+        this.setState({
+          modalErrors: ['name'],
+          keyword: ''
+        });
+      }
     }
     this.keyInput.focus();
   };
@@ -185,7 +212,7 @@ class EntryTagging extends Component {
 
   render() {
     // prettier-ignore
-    const { categories, groups, activeTag, selectedTags, tags, toggleActions, keyword, visibility, showModal, editable} = this.state;
+    const { categories, groups, modalErrors, activeTag, selectedTags, tags, toggleActions, keyword, visibility, showModal, editable} = this.state;
 
     const displayTaggingDropdown = () => {
       let categoriedTags = categories.reduce((acc, category) => {
@@ -228,7 +255,11 @@ class EntryTagging extends Component {
                   />
                 ))}
                 <div className="tagging-create">
-                  <button onClick={() => this.handleOpenCreateModal()}>
+                  <button
+                    onClick={() =>
+                      this.handleOpenCreateModal(item.category.id, keyword)
+                    }
+                  >
                     create a new {item.category.name}{' '}
                     {keyword ? `"${keyword}"` : ''}
                   </button>
@@ -321,6 +352,7 @@ class EntryTagging extends Component {
           isOpen={showModal}
           categories={categories}
           groups={groups}
+          errors={modalErrors}
           tagInfo={activeTag}
           editable={editable}
           onSubmit={this.handleSubmitTag}

@@ -24,6 +24,10 @@
       background-color: lighten($color, 7%);
     }
   }
+  .tag-image + .tag-details {
+    border-left: 1px solid lighten($color, 10%);
+    padding-left: 3px;
+  }
   .tag-header {
     background-color: lighten($color, 5%);
 
