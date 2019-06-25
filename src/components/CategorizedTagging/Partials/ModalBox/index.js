@@ -8,21 +8,26 @@ import './style.scss';
 
 ReactModal.setAppElement('#root');
 
+const initialState = {
+  name: '',
+  categoryId: '',
+  groupId: '',
+  description: '',
+  hasImage: false,
+  imgUrl: '',
+  enabled: true,
+  errors: []
+};
 class ModalBox extends Component {
-  state = {
-    name: '',
-    categoryId: '',
-    groupId: '',
-    description: '',
-    hasImage: false,
-    imgUrl: '',
-    enabled: true,
-    errors: []
+  state = { ...initialState };
+
+  clearState = () => {
+    this.setState({ ...initialState });
   };
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.isOpen) {
-      this.clearStates();
+      this.clearState();
     } else if (this.props.tagInfo !== nextProps.tagInfo) {
       this.setState({
         ...nextProps.tagInfo
@@ -67,19 +72,6 @@ class ModalBox extends Component {
 
   getErrorClass = (errors, field) => {
     return errors.includes(field) ? 'error' : '';
-  };
-
-  clearStates = () => {
-    this.setState({
-      name: '',
-      categoryId: '',
-      groupId: '',
-      description: '',
-      hasImage: false,
-      imgUrl: '',
-      enabled: true,
-      errors: []
-    });
   };
 
   handleSubmit = () => {

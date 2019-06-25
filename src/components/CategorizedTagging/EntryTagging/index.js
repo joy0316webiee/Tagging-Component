@@ -5,6 +5,7 @@ import { TagElementEx, CheckBox, ModalBox } from '../Partials';
 import axios from 'axios';
 
 import { colors } from '../constants.json';
+import { data } from '../dummy.json';
 import './style.scss';
 
 class EntryTagging extends Component {
@@ -47,25 +48,12 @@ class EntryTagging extends Component {
   }
 
   fetchData = () => {
-    this.setState({ loading: true });
-
-    const baseURL = 'http://localhost:3002/data';
-    axios
-      .get(baseURL)
-      .then(res => {
-        const { tags, ...data } = res.data;
-        this.setState({
-          ...data,
-          errors: [],
-          loading: false
-        });
-      })
-      .catch(err => {
-        this.setState({
-          loading: false,
-          errors: this.state.errors.concat(err)
-        });
-      });
+    const { tags, ...resData } = data;
+    this.setState({
+      ...resData,
+      errors: [],
+      loading: false
+    });
   };
 
   handleChangeKeyword = event => {
@@ -260,8 +248,7 @@ class EntryTagging extends Component {
                       this.handleOpenCreateModal(item.category.id, keyword)
                     }
                   >
-                    create a new {item.category.name}{' '}
-                    {keyword ? `"${keyword}"` : ''}
+                    {item.category.name} {keyword ? `"${keyword}"` : ''}
                   </button>
                 </div>
               </div>

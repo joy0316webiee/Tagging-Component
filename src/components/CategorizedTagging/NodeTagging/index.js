@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import AutosizeInput from 'react-input-autosize';
 import className from 'classnames';
 import { TagElement, CheckBox, ModalBox } from '../Partials';
-import axios from 'axios';
 
 import { colors } from '../constants.json';
+import { data } from '../dummy.json';
 import './style.scss';
 
 class NodeTagging extends Component {
@@ -41,27 +41,16 @@ class NodeTagging extends Component {
   }
 
   fetchData = () => {
-    const baseURL = 'http://localhost:3002/data';
-    axios
-      .get(baseURL)
-      .then(res => {
-        this.setState(
-          {
-            ...res.data,
-            errors: [],
-            loading: false
-          },
-          () => {
-            this.props.onFetchTags && this.props.onFetchTags(this.state.tags);
-          }
-        );
-      })
-      .catch(err => {
-        this.setState({
-          loading: false,
-          errors: this.state.errors.concat(err)
-        });
-      });
+    this.setState(
+      {
+        ...data,
+        errors: [],
+        loading: false
+      },
+      () => {
+        this.props.onFetchTags && this.props.onFetchTags(this.state.tags);
+      }
+    );
   };
 
   handleChangeKeyword = event => {
@@ -96,6 +85,7 @@ class NodeTagging extends Component {
     this.setState(
       {
         selectedTags: this.state.selectedTags.concat(tag),
+
         keyword: '',
         toggleTagging: false
       },
@@ -268,7 +258,7 @@ class NodeTagging extends Component {
                       this.handleOpenCreateModal(item.category.id, keyword)
                     }
                   >
-                    create a new {item.category.name} "{keyword}"
+                    {item.category.name} "{keyword}"
                   </button>
                 </div>
               </div>
